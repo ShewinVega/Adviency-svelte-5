@@ -1,38 +1,28 @@
-# sv
+# Monitoreo de Svelte 5: Runas y Manejo de Estados
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+## Introducción
+Este documento tiene como finalidad dejar constancia del proceso de monitoreo de **Svelte 5**, específicamente en lo relacionado con las *runas* . Se ha utilizado un proyecto práctico como referencia, orientado a la gestión de regalos de Navidad, con el objetivo de comprender cómo se aplican estos conceptos en un escenario real.
 
-## Creating a project
+## Objetivo
+El propósito principal de este seguimiento fue:
+- Familiarizarme con la sintaxis y nuevas funcionalidades de Svelte 5.
+- Comprender el uso de *runas*.
+- Analizar cómo las reactividades automáticas permiten una programación más clara y concisa.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Monitoreo de Svelte 5
+Durante el proceso se exploró cómo las *runas* introducen un paradigma más expresivo en comparación con versiones anteriores de Svelte. Aunque no se explica cada runa en detalle, se documenta el uso de **$state** y **$effect** como parte fundamental del manejo de datos reactivos.
 
-```sh
-# create a new project in the current directory
-npx sv create
+Ejemplo en el proyecto de referencia:
 
-# create a new project in my-app
-npx sv create my-app
-```
+```ts
+let gifts = $state<Gift[]>([]);
+let gift = $state<Partial<Gift>>(structuredClone(INITIAL_GIFT));
+let showModal = $state<boolean>(false);
+let totalPrice = $state<number>(0);
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+$effect(() => {
+  totalPrice = gifts.reduce(
+    (acc: number, current: Gift) => acc + (current.quantity * current.price), 
+    0
+  );
+});

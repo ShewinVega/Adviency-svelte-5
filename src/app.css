@@ -1,24 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap');
 @import "tailwindcss";
-@import '@fontsource/fira-mono';
 
-:root {
-	--font-body:
-		Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
-		'Open Sans', 'Helvetica Neue', sans-serif;
-	--font-mono: 'Fira Mono', monospace;
-	--color-bg-0: rgb(202, 216, 228);
-	--color-bg-1: hsl(209, 36%, 86%);
-	--color-bg-2: hsl(224, 44%, 95%);
-	--color-theme-1: #ff3e00;
-	--color-theme-2: #4075a6;
-	--color-text: rgba(0, 0, 0, 0.7);
-	--column-width: 42rem;
-	--column-margin-top: 4rem;
-	font-family: var(--font-body);
-	color: var(--color-text);
+
+@theme {
+	--font-chrismast: "Mountains of Christmas", serif;
 }
 
-body {
-	min-height: 100vh;
-	margin: 0;
+html {
+	background-image: url("https://as2.ftcdn.net/v2/jpg/02/92/78/05/1000_F_292780526_LHfhapfIlJ2odp3HbNKtgBtUZRIvXXNj.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 100vh;
+	display: grid;
+	place-content: center;
+}
+
+.mountains-of-christmas-regular {
+  font-family: "Mountains of Christmas", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.mountains-of-christmas-bold {
+  font-family: "Mountains of Christmas", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+button  {
+	@apply  px-4 py-2 text-white;
+
+	&.primary {
+		@apply bg-pink-500
+	}
+
+	&.danger {
+		@apply bg-red-500
+	}
 }
